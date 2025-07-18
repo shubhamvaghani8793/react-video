@@ -10,7 +10,7 @@ const WebcamCapture: React.FC = () => {
     console.log('Captured image:', imageSrc);
   };
 
-  const handleUserMediaError = (error: Error) => {
+  const handleUserMediaError = (error: string | DOMException) => {
     console.error("Camera access error:", error);
     setHasError(true);
   };
