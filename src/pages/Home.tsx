@@ -3,11 +3,13 @@ import Webcam from 'react-webcam';
 
 const WebcamCapture: React.FC = () => {
   const webcamRef = useRef<Webcam>(null);
+  const [imageSrc, setImageSrc] = useState<string[]>([]);
   const [hasError, setHasError] = useState(false);
 
   const capture = () => {
-    const imageSrc = webcamRef.current?.getScreenshot();
+    const imageSrc: string = webcamRef.current?.getScreenshot() || '';
     console.log('Captured image:', imageSrc);
+    setImageSrc(prev => [...prev, imageSrc]);
   };
 
   const handleUserMediaError = (error: string | DOMException) => {
@@ -33,6 +35,14 @@ const WebcamCapture: React.FC = () => {
           <button onClick={capture}>Capture</button>
         </>
       )}
+      {
+        imageSrc.map((src, index) => (
+            <>
+                <p>{src}</p>
+                <img key={src} src={src} alt={`Captured ${index + 1}`} width={200} height={200} />
+            </>
+        ))
+      }
     </div>
   );
 };
