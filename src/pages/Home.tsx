@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import Webcam from 'react-webcam';
+import MicrophoneComponent from '../components/Microphone';
 
 const WebcamCapture: React.FC = () => {
   const webcamRef = useRef<Webcam>(null);
@@ -35,6 +36,7 @@ const WebcamCapture: React.FC = () => {
           <button onClick={capture}>Capture</button>
         </>
       )}
+      <MicrophoneComponent />
       {
         imageSrc.map((src, index) => (
             <>
